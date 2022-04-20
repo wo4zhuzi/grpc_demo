@@ -18,5 +18,4 @@ func main()  {
 
 	res, _= client.Hello(context.Background(), &pb.HelloReq{Msg: "1234"})
 	log.Println("res", res.GetMsg())
-
 }

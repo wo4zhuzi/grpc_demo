@@ -7,10 +7,6 @@
 package pb
 
 import (
-	context "context"
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -207,84 +203,4 @@ func file_foo_proto_init() {
 	file_foo_proto_rawDesc = nil
 	file_foo_proto_goTypes = nil
 	file_foo_proto_depIdxs = nil
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConnInterface
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
-
-// FooClient is the client API for Foo service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type FooClient interface {
-	Hello(ctx context.Context, in *HelloReq, opts ...grpc.CallOption) (*HelloRes, error)
-}
-
-type fooClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewFooClient(cc grpc.ClientConnInterface) FooClient {
-	return &fooClient{cc}
-}
-
-func (c *fooClient) Hello(ctx context.Context, in *HelloReq, opts ...grpc.CallOption) (*HelloRes, error) {
-	out := new(HelloRes)
-	err := c.cc.Invoke(ctx, "/Foo/Hello", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// FooServer is the server API for Foo service.
-type FooServer interface {
-	Hello(context.Context, *HelloReq) (*HelloRes, error)
-}
-
-// UnimplementedFooServer can be embedded to have forward compatible implementations.
-type UnimplementedFooServer struct {
-}
-
-func (*UnimplementedFooServer) Hello(context.Context, *HelloReq) (*HelloRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Hello not implemented")
-}
-
-func RegisterFooServer(s *grpc.Server, srv FooServer) {
-	s.RegisterService(&_Foo_serviceDesc, srv)
-}
-
-func _Foo_Hello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FooServer).Hello(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/Foo/Hello",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FooServer).Hello(ctx, req.(*HelloReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _Foo_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "Foo",
-	HandlerType: (*FooServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Hello",
-			Handler:    _Foo_Hello_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "foo.proto",
 }

@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+//路径;package名
 option go_package = "./;pb";
 
 service Foo {

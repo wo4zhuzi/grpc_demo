@@ -28,8 +28,9 @@ func main() {
 	//创建gRPC 服务
 	s := grpc.NewServer()
 
+	a := fooServer{}
 	//注册服务
-	pb.RegisterFooServer(s, &fooServer{})
+	pb.RegisterFooServer(s, a)
 	reflection.Register(s)
 	err = s.Serve(lis)
 

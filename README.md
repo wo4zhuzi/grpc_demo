@@ -23,10 +23,10 @@ sudo ln -s /Users/kongdebo/Documents/application/protoc-3.19.4-osx-x86_64/bin/pr
 
 #### 安装 protoc-gen-go 插件
 ```
-go get -u github.com/golang/protobuf/protoc-gen-go
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 ```
 
-#### 安装 grpc
-```
-go get google.golang.org/grpc
+### 安装 protoc-gen-go-grpc 插件
+```shell
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 ```

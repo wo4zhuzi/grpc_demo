@@ -3,14 +3,19 @@ syntax = "proto3";
 //路径;package名
 option go_package = "./pb;pb";
 
+//定义Foo的服务
 service Foo {
-  rpc Hello(HelloReq) returns (HelloRes);
+  //简单的rpc服务
+  //在服务中定义一个Hello的方法
+  rpc Hello(HelloReq) returns (HelloRes) {};
 }
 
+//定义protocol buffer 请求类型
 message HelloReq {
   string  msg = 1;
 }
 
+//定义protocol buffer 返回类型
 message HelloRes {
   string msg = 2;
 }

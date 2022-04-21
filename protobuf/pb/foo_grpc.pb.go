@@ -70,7 +70,7 @@ type UnsafeFooServer interface {
 	mustEmbedUnimplementedFooServer()
 }
 
-func RegisterFooServer(s grpc.ServiceRegistrar, srv *interface{}) {
+func RegisterFooServer(s grpc.ServiceRegistrar, srv FooServer) {
 	s.RegisterService(&Foo_ServiceDesc, srv)
 }
 

@@ -10,6 +10,7 @@ import (
 )
 
 type fooServer struct {
+	*pb.UnimplementedFooServer
 }
 
 func (s *fooServer) Hello(ctx context.Context, in *pb.HelloReq) (*pb.HelloRes, error) {
@@ -27,10 +28,8 @@ func main() {
 
 	//创建gRPC 服务
 	s := grpc.NewServer()
-
-	a := fooServer{}
 	//注册服务
-	pb.RegisterFooServer(s, a)
+	pb.RegisterFooServer(s, &fooServer{})
 	reflection.Register(s)
 	err = s.Serve(lis)
 
